@@ -113,21 +113,19 @@ public class MiaoboApplicationContext {
         }
         //处理Aware接口
         if (o instanceof BeanNameAware) {
-            BeanNameAware beanNameAware = (BeanNameAware) o;
-            beanNameAware.setBeanName(beanName);
+            ((BeanNameAware)o).setBeanName(beanName);
         }
         //初始化前操作
         for (BeanPostProcessor beanPostProcessor : beanPostProcessorArrayList) {
-            beanPostProcessor.postProcessorBeforeInitializing(o, beanName);
+            o = beanPostProcessor.postProcessorBeforeInitializing(o, beanName);
         }
         //初始化
         if (o instanceof InitializingBean) {
-            InitializingBean initializingBean = (InitializingBean) o;
-            initializingBean.afterPropertiesSet();
+            ((InitializingBean)o).afterPropertiesSet();
         }
         //初始化后操作
         for (BeanPostProcessor beanPostProcessor : beanPostProcessorArrayList) {
-            beanPostProcessor.postProcessorAfterInitializing(o, beanName);
+            o = beanPostProcessor.postProcessorAfterInitializing(o, beanName);
         }
         return o;
     }

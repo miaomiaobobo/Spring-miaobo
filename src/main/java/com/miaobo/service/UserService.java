@@ -17,7 +17,7 @@ public class UserService implements BeanNameAware, InitializingBean, UserService
     }
 
     public void test(){
-        System.out.println("被代理对象："+orderService);
+        System.out.println("被代理的方法执行");
     }
 
     @Override
